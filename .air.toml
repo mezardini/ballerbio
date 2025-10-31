@@ -1,0 +1,39 @@
+# .air.toml
+root = "."
+tmp_dir = "tmp"
+
+[build]
+# The command to build the application
+cmd = "go build -o ./tmp/main ."
+# The directory containing your Go files
+include_dir = ["."]
+# Directories to exclude from monitoring
+exclude_dir = ["tmp", "vendor"]
+# Delay before building (milliseconds)
+delay = 100
+stop_on_error = true
+send_interrupt = false
+log = "build-errors.log"
+
+[run]
+# Command to execute the built binary
+cmd = "./tmp/main"
+env = [
+     "PORT=8081",
+]
+
+[watch]
+# File extensions to watch for changes
+exts = [".go", ".env", ".yaml"]
+# File extensions to ignore
+ignore_exts = [".md"]
+
+[color]
+main = "cyan"
+watcher = "green"
+build = "blue"
+runner = "yellow"
+
+[log]
+time = false
+main_only = false
